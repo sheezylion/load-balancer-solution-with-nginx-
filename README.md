@@ -129,7 +129,16 @@ Result:
 
 ## Part 2 - Register a new domain name and configure secured connection using SSL/TLS certificates
 
-In order to get a valid SSL certificate we need to register a new domain name, we can do it using any Domain name registrar - a company that manages reservation of domain names. The most popular ones are: <a href="Godaddy.com">Godaddy.com</a>, Domain.com, Bluehost.com.
+In order to get a valid SSL certificate we need to register a new domain name, we can do it using any Domain name registrar - a company that manages reservation of domain names. The most popular ones are: <a href="Godaddy.com">Godaddy.com</a>, <a href="Domain.com">Domain.com</a>, <a href="Bluehost.com">Bluehost.com</a>.
+
+#### 1. Register a new domain name with any registrar of your choice in any domain zone. (e.g .com, .net, .org, .edu, info, .xyz or any other)
+
+- <a href="Cloudns.net">Cloudns.net</a> is the domain name registrar used for this project.
+
+Result:
+
+<img width="1609" alt="Screenshot 2024-06-27 at 17 03 53" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/74fa40ba-27e7-425b-9bbd-24274b6a29ad">
+
 
 
 
