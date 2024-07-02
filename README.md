@@ -168,6 +168,140 @@ Result:
 
 Use <a href="https://dnschecker.org/#A/www.toolingsolution.dns-dynamic.net">nds checker</a> to Verify the DNS record
 
+Result:
+
+<img width="1337" alt="Screenshot 2024-07-02 at 01 19 02" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/6d5f6a30-e01f-4452-84ab-e4fee7bf4257">
+
+
+#### 4. Configure Nginx to recognize your new domain name
+
+Update your nginx.conf with server_name www.<your-domain-name.com instead of server_name www.domain.com
+
+In our case, the server_name is www.devopsnew.dns-dynamic.net
+
+```
+sudo vi /etc/nginx/nginx.conf
+```
+
+ Result:
+
+ <img width="802" alt="Screenshot 2024-07-02 at 01 22 40" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/f240893b-4679-447b-a1b2-ce4edf56c6d7">
+
+
+ #### Restart and check status of Nginx
+
+ ```
+sudo systemctl restart nginx
+sudo systemctl status nginx
+```
+
+Result:
+
+<img width="1042" alt="Screenshot 2024-07-02 at 01 23 56" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/d51d21ce-4665-4584-a22e-3ec547541818">
+
+#### Check that the Web Server can be reach from a browser with the new domain name using HTTP protocol.
+
+```
+http://<your-domain-name.com>
+```
+
+Result:
+
+<img width="1638" alt="Screenshot 2024-07-02 at 01 25 40" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/6d59cc5c-2d00-4bad-8029-c1d681826696">
+
+
+#### 5. Install <a href="https://certbot.eff.org/">certbot</a> and request for an SSL/TLS certificate
+
+Ensure <a href="https://snapcraft.io/snapd">snapd</a> service is active and running
+
+```
+sudo systemctl status snapd
+```
+
+Result:
+
+<img width="1198" alt="Screenshot 2024-07-02 at 01 29 44" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/1ea4aaa4-dc80-470c-a5a3-2281fb610618">
+
+#### Install certbot
+
+```
+sudo snap install --classic certbot
+```
+
+Result:
+
+<img width="792" alt="Screenshot 2024-07-02 at 01 31 06" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/52b3b1c4-9f0f-49c1-b410-86cf9a275810">
+
+### Request SSL/TLS Certificate
+
+Create a Symlink in /usr/bin for Certbot: Place a symbolic link in this PATH to make it easier to run certbot from the command line without needing to specify its full path.
+
+```
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+```
+
+Follow the certbot instructions you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so ensure you have updated it on step 4.
+
+```
+sudo certbot --nginx  # Obtain certificate
+```
+
+Result:
+
+<img width="847" alt="Screenshot 2024-07-02 at 01 36 24" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/1f1aeddc-6597-4f56-887f-6010a7a1c9e5">
+
+### Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>.
+
+You shall be able to access your wesite using HTTPS protocol (Uses TCP port 443) and see a padlock image in your browsers' search string. Click on the padlock icon and you can see the detail of the certificate issued for the website.
+
+Results:
+
+<img width="1471" alt="Screenshot 2024-07-02 at 01 38 20" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/67278922-2887-4d32-bfe2-d2df09122628">
+
+<img width="1280" alt="Screenshot 2024-07-02 at 01 38 36" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/e628a7e9-9b49-4869-933d-82ad569265b4">
+
+<img width="1548" alt="Screenshot 2024-07-02 at 01 40 03" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/df093911-de0f-4425-ad94-71d122e7a98b">
+
+#### 6. Set up periodical renewal of your SSL/TLS certificate
+
+By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
+
+Test the renewal command in dry-run mode
+
+```
+sudo certbot renew --dry-run
+```
+
+Result:
+
+<img width="833" alt="Screenshot 2024-07-02 at 01 41 49" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/fbe9ead8-ea4a-40c6-a57c-26213b566ff2">
+
+Best pracice is to have a scheduled job that runs renew command periodically. Configure a cronjob to run the command twice a day
+
+Edit the crontab file
+
+```
+crontab -e
+```
+
+Result:
+
+<img width="707" alt="Screenshot 2024-07-02 at 01 43 09" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/e2e27a16-d804-47da-b8f8-1e30abdaf7c8">
+
+Add the following line to scheduled a job that runs renew command twice daily
+
+```
+* */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
+```
+
+Result:
+
+<img width="938" alt="Screenshot 2024-07-02 at 01 43 39" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/753e5107-d5f9-41ef-b42c-a26b69a68a26">
+
+You can always change the interval of the cronjob if twice a day is too often by adjusting the schedule expression.
+
+
+
 
 
 
