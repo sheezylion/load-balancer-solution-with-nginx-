@@ -135,15 +135,38 @@ In order to get a valid SSL certificate we need to register a new domain name, w
 
 - <a href="Cloudns.net">Cloudns.net</a> is the domain name registrar used for this project.
 
-Result:
+Results:
 
 <img width="1609" alt="Screenshot 2024-06-27 at 17 03 53" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/74fa40ba-27e7-425b-9bbd-24274b6a29ad">
 
+<img width="1661" alt="Screenshot 2024-07-02 at 00 55 05" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/3a5ce47d-3779-4e35-bd8a-7e3be96280d4">
 
 
+#### 2. Assign an Elastic IP to our Nginx LB server and associate our domain name with this Elastic IP
+This is neccessary in order to have a static IP address that does not change after reboot.
+
+Results:
+
+<img width="1680" alt="Screenshot 2024-07-02 at 01 04 28" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/4f1666b1-6b59-4e96-8f4e-d061b759a363">
 
 
+<img width="1216" alt="Screenshot 2024-07-02 at 01 06 45" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/4cd35b88-e4fa-4a22-9ae6-1605fc381982">
 
+
+<img width="1660" alt="Screenshot 2024-07-02 at 01 08 09" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/d6998866-bd70-477f-9791-bc1cb379a748">
+
+
+<img width="1436" alt="Screenshot 2024-07-02 at 01 08 57" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/11c4246a-1cfe-4e01-8e30-31939545155b">
+
+#### 3. Update or create A record your registrar to point to Nginx LB using the elastic IP
+
+Result:
+
+<img width="1531" alt="Screenshot 2024-07-02 at 01 12 32" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/299f9609-0797-4c48-a24c-cbb6d0dafb14">
+
+<img width="1522" alt="Screenshot 2024-07-02 at 01 13 35" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/fcda7ea4-7db8-4377-9ebc-250925f80995">
+
+Use < a href="https://dnschecker.org/#A/www.toolingsolution.dns-dynamic.net">nds checker</a> to Verify the DNS record
 
 
 
