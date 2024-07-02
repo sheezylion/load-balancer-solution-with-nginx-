@@ -166,7 +166,7 @@ Result:
 
 <img width="1522" alt="Screenshot 2024-07-02 at 01 13 35" src="https://github.com/sheezylion/load-balancer-solution-with-nginx-/assets/142250556/fcda7ea4-7db8-4377-9ebc-250925f80995">
 
-Use < a href="https://dnschecker.org/#A/www.toolingsolution.dns-dynamic.net">nds checker</a> to Verify the DNS record
+Use <a href="https://dnschecker.org/#A/www.toolingsolution.dns-dynamic.net">nds checker</a> to Verify the DNS record
 
 
 
